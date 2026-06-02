@@ -45,8 +45,6 @@ if (isset($_SESSION['keranjang']) && is_array($_SESSION['keranjang'])) {
         <div style="font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; gap: 20px;">
             <a href="index.php?area=consumer&action=home" style="color: #DAF1DE; text-decoration: none; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#f2d472'" onmouseout="this.style.color='#DAF1DE'">Home</a>
             
-            <a href="index.php?area=consumer&action=katalog" style="color: #DAF1DE; text-decoration: none; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#f2d472'" onmouseout="this.style.color='#DAF1DE'">Katalog</a>
-            
             <span style="color: #163832;">|</span> 
 
             <?php 
@@ -57,12 +55,12 @@ if (isset($_SESSION['keranjang']) && is_array($_SESSION['keranjang'])) {
                 <span style="color: #8EB69B; font-size: 0.95rem;">Halo, <b style="color: #DAF1DE;"><?= htmlspecialchars($_SESSION['nama'] ?? 'Customer') ?></b></span>
                 
                 <a href="index.php?area=consumer&action=pesanan_saya" style="color: #8EB69B; text-decoration: none; font-weight: bold; margin-left: 10px; transition: 0.2s;" onmouseover="this.style.color='#DAF1DE'" onmouseout="this.style.color='#8EB69B'">
-                    📦 Pesanan Saya
+                    Pesanan Saya
                 </a>
 
                 <!-- Tombol Keranjang (Sudah diubah jadi Hijau sesuai permintaanmu) -->
-                <a href="index.php?area=consumer&action=keranjang" style="color: #ffffff; text-decoration: none; font-weight: 900; margin-left: 10px; background: #16a34a; padding: 8px 18px; border-radius: 25px; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 10px rgba(22, 163, 74, 0.3);" onmouseover="this.style.background='#15803d'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(22, 163, 74, 0.4)';" onmouseout="this.style.background='#16a34a'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(22, 163, 74, 0.3)';">
-                    🛒 Keranjang (<?= $total_item_keranjang ?>)
+                <a href="index.php?area=consumer&action=keranjang" style="color: #ffffff; text-decoration: none; font-weight: 900; margin-left: 10px; background: #82c49aff; padding: 8px 18px; border-radius: 25px; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 10px rgba(22, 163, 74, 0.3);" onmouseover="this.style.background='#43d970ff'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(22, 163, 74, 0.4)';" onmouseout="this.style.background='#16a34a'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(22, 163, 74, 0.3)';">
+                    🛒 (<?= $total_item_keranjang ?>)
                 </a>
                 
                 <a href="index.php?area=auth&action=logout" style="color: #ff6b6b; text-decoration: none; font-weight: bold; padding: 7px 18px; border: 1px solid #ff6b6b; background: transparent; border-radius: 6px; transition: 0.2s; margin-left: 10px;" onmouseover="this.style.background='rgba(255, 107, 107, 0.1)'" onmouseout="this.style.background='transparent'">

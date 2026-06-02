@@ -33,7 +33,7 @@
             </form>
         <?php else: ?>
             <div style="background: #DAF1DE; color: #163832; padding: 15px; border-radius: 6px; text-align: center; font-weight: bold;">
-                ✅ Bukti transfer sudah diunggah. Menunggu verifikasi admin.
+                Bukti transfer sudah diunggah. Menunggu verifikasi admin.
             </div>
         <?php endif; ?>
 
@@ -41,7 +41,7 @@
         
         <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 20px; border-radius: 8px;">
             <p style="color: #b45309; margin: 0; font-weight: bold; line-height: 1.6;">
-                ⚠️ Anda memilih Bayar di Tempat (COD).<br>
+                Anda memilih Bayar di Tempat (COD).<br>
                 Silakan siapkan uang tunai pas sejumlah <strong>Rp <?= number_format($pesanan['total_harga'], 0, ',', '.') ?></strong> untuk diserahkan kepada kurir kami saat pesanan tiba.
             </p>
         </div>

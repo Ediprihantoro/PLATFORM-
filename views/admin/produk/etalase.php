@@ -1,12 +1,11 @@
 <h2 style="color: #051F20; border-bottom: 2px solid #8EB69B; padding-bottom: 10px;">Preview Etalase Toko</h2>
-
 <div style="background: linear-gradient(135deg, #0B2B26 0%, #051F20 100%); border-radius: 15px; padding: 40px 30px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; margin-top: 20px; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.2); overflow: hidden; border: 1px solid #163832;">
     <div style="position: relative; z-index: 1;">
         <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 2.8rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">
             <span style="color: #f2d472;">FROZEN</span> <span style="color: #DAF1DE;">FOOD RANGE</span>
         </h1>
         <p style="color: #8EB69B; margin: 0 0 20px 0; font-size: 1.1rem; line-height: 1.6; max-width: 550px;">
-            <strong style="color: #DAF1DE; letter-spacing: 2px;">TASTY • CONVENIENT • ALWAYS FRESH</strong><br><br>
+            <strong style="color: #DAF1DE; letter-spacing: 2px;">TASTY • CONVENIENT • ALWAYS FRESH kamu</strong><br><br>
             Tampilan etalase ini persis seperti yang dilihat oleh pelanggan Anda.
         </p>
         <div style="display: flex; gap: 20px; margin-bottom: 10px;">
@@ -17,7 +16,7 @@
     </div>
     
     <div style="font-size: 6rem; position: relative; z-index: 1; display: flex; gap: 10px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));">
-        🍟 🍗
+        
     </div>
 </div>
 

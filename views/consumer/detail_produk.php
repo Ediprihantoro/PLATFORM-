@@ -73,7 +73,7 @@
                         </div>
 
                         <button type="submit" onclick="return validasiVariasi()" style="width: 100%; padding: 14px; background: #f2d472; color: #051F20; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(242, 212, 114, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 15px rgba(242, 212, 114, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(242, 212, 114, 0.3)';">
-                            🛒 + Keranjang
+                            Tambahkan Keranjang
                         </button>
                     </form>
                 <?php else: ?>

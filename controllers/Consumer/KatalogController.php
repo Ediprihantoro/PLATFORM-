@@ -260,7 +260,7 @@ class KatalogController {
 
         // Tampilkan ke layar
         require_once 'views/consumer/layout/header.php';
-        require_once 'views/consumer/detail_pesanan.php'; // Kita buat file ini di bawah
+        require_once 'views/consumer/pembayaran.php'; // Kita buat file ini di bawah
         require_once 'views/consumer/layout/footer.php';
     }
     // TAMBAHKAN FUNGSI INI DI BAWAH)

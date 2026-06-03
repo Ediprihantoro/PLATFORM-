@@ -150,7 +150,7 @@ class TransaksiModel {
    // INI ADALAH FUNGSI YANG DICARI OLEH CONTROLLER ADMIN!
     public function getAllPesananAdmin() {
         // Menggabungkan tabel pesanan dan customer agar nama pembeli muncul di tabel admin
-        $query = "SELECT p.idPesanan AS idOrder, p.tanggal_pesanan, p.total_harga AS total, p.status_pesanan AS status, p.bukti_transfer, u.nama AS nama_pembeli 
+        $query = "SELECT p.idPesanan AS idOrder, p.tanggal_pesanan, p.total_harga AS total, p.status_pesanan AS status, p.bukti_transfer, p.metode_pembayaran, u.nama AS nama_pembeli 
                   FROM pesanan p 
                   JOIN customer u ON p.idUser = u.idUser 
                   ORDER BY p.idPesanan DESC";

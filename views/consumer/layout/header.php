@@ -54,7 +54,7 @@ if (isset($_SESSION['keranjang']) && is_array($_SESSION['keranjang'])) {
                 <span style="color: #8EB69B; font-size: 0.95rem;">Halo, <b style="color: #DAF1DE;"><?= htmlspecialchars($_SESSION['nama'] ?? 'Customer') ?></b></span>
                 
                 <a href="index.php?area=consumer&action=pesanan_saya" style="color: #8EB69B; text-decoration: none; font-weight: bold; margin-left: 10px; transition: 0.2s;" onmouseover="this.style.color='#f2d472'" onmouseout="this.style.color='#8EB69B'">
-                    📦 Pesanan
+                     Pesanan Saya
                 </a>
 
                 <a href="index.php?area=consumer&action=keranjang" style="color: #ffffff; text-decoration: none; font-weight: 900; margin-left: 10px; background: #044c1f; padding: 8px 18px; border-radius: 25px; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 10px rgba(4, 76, 31, 0.3);" onmouseover="this.style.background='#0c5527'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(4, 76, 31, 0.4)';" onmouseout="this.style.background='#044c1f'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(4, 76, 31, 0.3)';">

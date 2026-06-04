@@ -7,9 +7,10 @@
     <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 5px;">
         
         <div style="flex: 2; min-width: 300px;">
-            <div style="width: 100%; height: 350px; background: #DAF1DE; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid #8EB69B; margin-bottom: 25px; overflow: hidden;">
+            
+            <div style="width: 100%; height: 350px; background: #ffffff; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid #8EB69B; margin-bottom: 25px; overflow: hidden; padding: 20px; box-sizing: border-box;">
                 <?php if(!empty($produk['gambar'])): ?>
-                    <img src="assets/images/produk/<?= htmlspecialchars($produk['gambar']) ?>" alt="<?= htmlspecialchars($produk['namaProduk']) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/produk/<?= htmlspecialchars($produk['gambar']) ?>" alt="<?= htmlspecialchars($produk['namaProduk']) ?>" style="width: 100%; height: 100%; object-fit: contain;">
                 <?php else: ?>
                     <span style="color: #8EB69B; font-size: 4rem; opacity: 0.5;">📦</span>
                 <?php endif; ?>
@@ -20,25 +21,32 @@
                 Rp <?= number_format($produk['harga_eceran'], 0, ',', '.') ?>
             </div>
 
-            <div style="margin-bottom: 30px;">
-                <h3 style="color: #051F20; margin-bottom: 15px; font-size: 1.1rem; border-bottom: 1px solid #DAF1DE; padding-bottom: 10px;">
-                    Pilih variasi: <span id="teks-variasi-terpilih" style="color: #64748b; font-weight: normal; font-size: 1rem;">(Belum dipilih)</span>
-                </h3>
-                
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <button type="button" class="btn-variasi" onclick="pilihVariasi(this, 'Original 500g')" style="padding: 10px 18px; background: #ffffff; border: 1px solid #cbd5e1; color: #475569; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
-                        (Original 500g)
-                    </button>
+            <?php 
+            if(!empty($produk['variasi'])): 
+                $list_variasi = explode(',', $produk['variasi']);
+            ?>
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #051F20; margin-bottom: 15px; font-size: 1.1rem; border-bottom: 1px solid #DAF1DE; padding-bottom: 10px;">
+                        Pilih variasi: <span id="teks-variasi-terpilih" style="color: #ef4444; font-weight: bold; font-size: 1rem;">(Wajib dipilih)</span>
+                    </h3>
                     
-                    <button type="button" class="btn-variasi" onclick="pilihVariasi(this, 'Pedas 500g')" style="padding: 10px 18px; background: #ffffff; border: 1px solid #cbd5e1; color: #475569; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
-                        (Pedas 500g)
-                    </button>
-                    
-                    <button type="button" class="btn-variasi" onclick="pilihVariasi(this, 'Ekstra Keju 500g')" style="padding: 10px 18px; background: #ffffff; border: 1px solid #cbd5e1; color: #475569; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
-                        (Ekstra Keju 500g)
-                    </button>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <?php foreach($list_variasi as $var): ?>
+                            <?php 
+                                $var = trim($var);
+                                if(empty($var)) continue; 
+                            ?>
+                            <button type="button" class="btn-variasi" onclick="pilihVariasi(this, '<?= htmlspecialchars($var) ?>')" style="padding: 10px 18px; background: #ffffff; border: 1px solid #cbd5e1; color: #475569; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
+                                <?= htmlspecialchars($var) ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
+            <?php else: ?>
+                <div style="margin-bottom: 30px; border-bottom: 1px solid #DAF1DE; padding-bottom: 10px;">
+                    <span style="color: #64748b; font-size: 0.95rem;">Varian: <strong style="color: #16a34a;">Standard / Tanpa Variasi</strong></span>
+                </div>
+            <?php endif; ?>
 
             <div style="border-bottom: 2px solid #DAF1DE; padding-bottom: 10px; margin-bottom: 15px;">
                 <span style="color: #163832; font-weight: bold; font-size: 1.1rem; border-bottom: 3px solid #8EB69B; padding-bottom: 10px;">Informasi Produk</span>
@@ -57,7 +65,8 @@
                 <?php if ($produk['stok'] > 0): ?>
                     <form action="index.php?area=consumer&action=tambah_keranjang" method="POST" id="form-keranjang">
                         <input type="hidden" name="idProduk" value="<?= $produk['idProduk'] ?>">
-                        <input type="hidden" name="variasi" id="input-variasi-tersembunyi" value="">
+                        
+                        <input type="hidden" name="variasi" id="input-variasi-tersembunyi" value="<?= !empty($produk['variasi']) ? '' : 'Standard' ?>">
                         
                         <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
                             <input type="number" name="jumlah" min="1" max="<?= $produk['stok'] ?>" value="1" required style="width: 80px; padding: 10px; background: #F7FAF8; border: 1px solid #8EB69B; color: #051F20; border-radius: 6px; text-align: center; font-weight: bold; font-size: 1.1rem; outline: none;">
@@ -91,7 +100,6 @@
 
 <script>
     function pilihVariasi(elemenTombol, namaVariasi) {
-        // 1. Reset semua tombol ke abu-abu (default theme cerah)
         let semuaTombol = document.querySelectorAll('.btn-variasi');
         semuaTombol.forEach(function(tombol) {
             tombol.style.borderColor = '#cbd5e1';
@@ -99,20 +107,18 @@
             tombol.style.background = '#ffffff';
         });
 
-        // 2. Ubah warna tombol yang diklik menjadi Aktif (Warna Emas Premium)
         elemenTombol.style.borderColor = '#d4af37';
         elemenTombol.style.color = '#051F20';
         elemenTombol.style.background = '#f2d472';
 
-        // 3. Ubah teks keterangan pilihan variasi (Warna Emas Gelap)
         document.getElementById('teks-variasi-terpilih').innerText = '(' + namaVariasi + ')';
         document.getElementById('teks-variasi-terpilih').style.color = '#b48600';
         document.getElementById('teks-variasi-terpilih').style.fontWeight = 'bold';
 
-        // 4. Masukkan nama variasi ke dalam form tersembunyi
         document.getElementById('input-variasi-tersembunyi').value = namaVariasi;
     }
 
+    // PERBAIKAN 4: Validasi JavaScript
     function validasiVariasi() {
         let variasiTerpilih = document.getElementById('input-variasi-tersembunyi').value;
         if (variasiTerpilih === "") {

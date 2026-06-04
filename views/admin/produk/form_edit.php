@@ -1,7 +1,7 @@
 <div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 0 auto; padding-top: 10px;">
     
     <h2 style="color: #051F20; border-bottom: 2px solid #8EB69B; padding-bottom: 10px; text-align: center;">
-        ✏️ Edit Produk
+        Edit Produk
     </h2>
 
     <div style="background: #ffffff; padding: 40px; border-radius: 12px; border: 1px solid #8EB69B; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.05); margin-top: 20px;">

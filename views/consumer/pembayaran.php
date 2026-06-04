@@ -14,8 +14,17 @@
         <?php 
         $status = $detail_pesanan['status_pesanan'] ?? '';
         $metode = $detail_pesanan['metode_pembayaran'] ?? ''; 
-        $total = $detail_pesanan['total_harga'] ?? 0;
+        $kurir  = $detail_pesanan['metode_pengiriman'] ?? ''; 
+        $total  = $detail_pesanan['total_harga'] ?? 0;
+
+        // RUMUS KEBAL PELURU: Apapun ketikan di database, selama ada unsur kata COD/TEMPAT, akan dianggap tunai.
+        $metode_kecil = strtolower($metode);
+        $is_tunai = (strpos($metode_kecil, 'cod') !== false || strpos($metode_kecil, 'tempat') !== false || $metode == 'Bayar di Tempat (COD)');
         ?>
+
+        <div style="background: #e0f2fe; border: 1px solid #38bdf8; color: #0369a1; padding: 10px; border-radius: 6px; margin-bottom: 20px; font-weight: bold; text-align: center;">
+            Sistem Membaca Metode: [ <?= htmlspecialchars($metode) ?> ]
+        </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #DAF1DE; padding-bottom: 15px; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
             <h3 style="color: #051F20; margin: 0; font-size: 1.3rem;">Order #LZT-<?= str_pad($detail_pesanan['idPesanan'], 4, '0', STR_PAD_LEFT) ?></h3>
@@ -24,15 +33,28 @@
             </span>
         </div>
 
-        <?php if ($metode == 'COD' || $metode == 'Bayar di Tempat'): ?>
+        <?php if ($is_tunai): ?>
+            
             <div style="background: #DAF1DE; border: 1px solid #8EB69B; padding: 30px; border-radius: 8px; text-align: center;">
-                <span style="font-size: 4rem; margin-bottom: 15px; display: block;">🚚</span>
+                <span style="font-size: 4rem; margin-bottom: 15px; display: block;">
+                    <?= ($kurir == 'Ambil Sendiri') ? '🏪' : '🚚' ?>
+                </span>
+                
                 <h3 style="color: #051F20; margin-top: 0; font-size: 1.5rem; font-weight: 900;">Pesanan Berhasil Dibuat!</h3>
                 <p style="color: #163832; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0;">
-                    Anda memilih metode pengiriman <strong>Bayar di Tempat (COD)</strong>.<br><br>
+                    Anda memilih metode 
+                    <strong><?= ($kurir == 'Ambil Sendiri') ? 'Ambil & Bayar Langsung di Toko' : 'Bayar di Tempat (COD)' ?></strong>.<br><br>
+                    
                     Silakan siapkan uang tunai sebesar:<br>
                     <strong style="font-size: 1.8rem; color: #16a34a; background: #ffffff; padding: 5px 15px; border-radius: 8px; display: inline-block; margin-top: 10px; border: 1px solid #8EB69B;">Rp <?= number_format($total, 0, ',', '.') ?></strong><br>
-                    <span style="font-size: 0.9rem; display: block; margin-top: 10px;">untuk diserahkan kepada kurir kami saat pesanan tiba.</span>
+                    
+                    <span style="font-size: 0.9rem; display: block; margin-top: 10px; font-weight: bold;">
+                        <?php if ($kurir == 'Ambil Sendiri'): ?>
+                            * Diserahkan kepada kasir kami saat Anda mengambil pesanan di toko.
+                        <?php else: ?>
+                            * Diserahkan kepada kurir kami saat pesanan tiba di lokasi Anda.
+                        <?php endif; ?>
+                    </span>
                 </p>
             </div>
 
@@ -69,21 +91,19 @@
                         <input type="file" name="bukti_transfer" accept="image/png, image/jpeg, image/jpg" required style="padding: 12px; border: 1px dashed #8EB69B; border-radius: 6px; background: #ffffff; color: #475569; outline: none; cursor: pointer;">
                         
                         <button type="submit" style="padding: 15px; background: #f2d472; color: #051F20; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 6px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 10px rgba(242, 212, 114, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 15px rgba(242, 212, 114, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(242, 212, 114, 0.3)';">
-                            Kirim Bukti Pembayaran ➔
+                            Kirim Bukti Pembayaran 
                         </button>
                     </form>
                 </div>
 
             <?php elseif ($status == 'Menunggu Verifikasi'): ?>
                 <div style="background: #F7FAF8; border: 1px solid #8EB69B; padding: 40px 20px; border-radius: 8px; text-align: center;">
-                    <span style="font-size: 4rem; display: block; margin-bottom: 15px;">⏳</span>
                     <h3 style="color: #051F20; margin-top: 0; font-weight: 900;">Bukti Transfer Sedang Diverifikasi</h3>
                     <p style="color: #235347; font-size: 1.1rem; max-width: 500px; margin: 0 auto; line-height: 1.5;">Terima kasih! Bukti pembayaranmu sudah kami terima dan sedang dicek oleh tim kami. Silakan cek status pesananmu secara berkala.</p>
                 </div>
 
             <?php else: ?>
                 <div style="background: #DAF1DE; border: 1px solid #8EB69B; padding: 40px 20px; border-radius: 8px; text-align: center;">
-                    <span style="font-size: 4rem; display: block; margin-bottom: 15px;">📦</span>
                     <h3 style="color: #051F20; margin-top: 0; font-weight: 900;">Status Saat Ini: <?= htmlspecialchars($status) ?></h3>
                     <p style="color: #163832; font-size: 1.1rem;">Pesananmu sedang dalam pantauan sistem.</p>
                 </div>

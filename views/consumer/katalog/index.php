@@ -5,31 +5,27 @@
 
 <h2 style="color: #051F20; border-bottom: 2px solid #8EB69B; padding-bottom: 10px;">Katalog Produk</h2>
 
-<div style="background: linear-gradient(135deg, #0B2B26 0%, #051F20 100%); border-radius: 15px; padding: 40px 30px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; margin-top: 20px; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.2); overflow: hidden; border: 1px solid #163832;">
+<div style="background: linear-gradient(rgba(5, 31, 32, 0.82), rgba(5, 31, 32, 0.82)), url('assets/images/latarBanner.jpg'); background-size: cover; background-position: center; border-radius: 15px; padding: 50px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 40px; margin-top: 20px; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.2); overflow: hidden; border: 1px solid #163832;">
+    
+    <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 3.8rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">
+        <span style="color: #f6c30a; font-family:'Limelight', cursive;">LEZZAT</span> <span style="color: #DAF1DE; font-family:Limelight">NYA KEBANGETAN</span>
+    </h1>
+    
+    <p style="color: #d5e7da; margin: 0 auto 25px auto; font-size: 1.1rem; line-height: 1.5; max-width: 600px; font-family: Poppins;">
+        <strong style="color: #e2db9a; letter-spacing: 2px; font-family: 'Bodoni Moda', sans-serif; font-style: italic; font-size:1.1rem;">tasty • convenient • always fresh</strong><br><br>
+        Temukan berbagai pilihan menu praktis premium untuk kehangatan keluarga. Tinggal goreng atau kukus, siap saji dalam hitungan menit!
+    </p>
 
-    <div style="position: relative; z-index: 1;">
-        <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 2.8rem; font-weight: 900; letter-spacing: 1px; text-transform: lower;">
-            <span style="color: #f6c30a;  font-family:'Limelight', cursive;">LEZZAT</span> <span style="color: #DAF1DE; font-family:Limelight">NYA KEBANGETAN</span>
-        </h1>
-        <p style="color: #d5e7da; margin: 0 0 20px 0; font-size: 1.1rem; line-height: 1.5; max-width: 550px; font-family: Poppins;">
-            <strong style="color: #e2db9a; letter-spacing: 2px;font-family: 'Bodoni Moda', sans-serif; font-style: italic; font-size:1rem;">tasty • convenient • always fresh</strong><br><br>
-            Temukan berbagai pilihan menu praktis premium untuk kehangatan keluarga. Tinggal goreng atau kukus, siap saji dalam hitungan menit!
-        </p>
-
-        <div style="display: flex; gap: 20px; margin-bottom: 25px;">
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> Freshly Frozen</span>
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> Ready in Minutes</span>
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> 100% Halal</span>
-        </div>
-
-        <a href="#area-produk" style="display: inline-block; padding: 12px 30px; background: #f2d472; color: #051F20; text-decoration: none; border-radius: 5px; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            Order Online
-        </a>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
+        <span style="color: #DAF1DE; font-size: 0.95rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">❄️</span> Freshly Frozen</span>
+        <span style="color: #DAF1DE; font-size: 0.95rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">⏱️</span> Ready in Minutes</span>
+        <span style="color: #DAF1DE; font-size: 0.95rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">✅</span> 100% Halal</span>
     </div>
 
-    <div style="font-size: 6rem; position: relative; z-index: 1; display: flex; gap: 10px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));">
-        <!-- ini -->
-    </div>
+    <a href="#area-produk" style="display: inline-block; padding: 12px 35px; background: #f2d472; color: #051F20; text-decoration: none; border-radius: 5px; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        Order Online
+    </a>
+
 </div>
 
 <div id="area-produk"></div>
@@ -71,31 +67,27 @@
 
                     <?php if ($row['stok'] > 0): ?>
 
-                        <p style="font-size: 0.85rem; margin: 0 0 15px 0; font-weight: bold; color: #163832; font-weight:bold;">
+                        <p style="font-size: 0.85rem; margin: 0 0 15px 0; font-weight: bold; color: #163832;">
                             Sisa stok: <?= htmlspecialchars($row['stok']) ?>
                         </p>
 
                         <?php
-                        // Cek apakah user sudah login DAN bertipe 'customer'
                         $is_customer = (isset($_SESSION['tipe_akun']) && strtolower($_SESSION['tipe_akun']) == 'customer');
                         ?>
 
                         <?php if ($is_customer): ?>
 
-                            <!-- CUSTOMER: Tombol normal, lanjut ke halaman Detail Produk -->
-                            <a href="index.php?area=consumer&action=detail_produk&id=<?= $row['idProduk'] ?>" style="display: block; text-align: center; background: #f2d472;font-family: 'Montserrat',sans-serif;font-weight:700;font-size: 14px;text-transform: uppercase;color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
+                            <a href="index.php?area=consumer&action=detail_produk&id=<?= $row['idProduk'] ?>" style="display: block; text-align: center; background: #f2d472;font-family: 'Montserrat',sans-serif;font-weight:700;font-size: 14px;text-transform: uppercase;color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
                                 Beli Sekarang
                             </a>
 
                         <?php else: ?>
 
-                            <!-- NON-CUSTOMER (Guest/Admin): Panggil fungsi customAlertRedirect -->
                             <a href="index.php?area=auth&action=login" onclick="customAlertRedirect(event, this.href)" style="display: block; text-align: center; background: #f2d472; color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
                                 Beli Sekarang
                             </a>
 
                         <?php endif; ?>
-
                     <?php else: ?>
 
                         <p style="font-size: 0.85rem; margin: 0 0 15px 0; font-weight: bold; color: #ff6b6b;">
@@ -122,13 +114,10 @@
 
 <script>
     function customAlertRedirect(event, url) {
-        // Tahan klik agar tidak langsung pindah halaman seketika
         event.preventDefault();
 
-        // Cegah alert menumpuk jika user menekan tombol Beli berkali-kali
         if (document.getElementById('custom-toast-alert')) return;
 
-        // Buat elemen notifikasi (Toast) yang elegan
         let alertBox = document.createElement('div');
         alertBox.id = 'custom-toast-alert';
         alertBox.style.position = 'fixed';
@@ -143,11 +132,10 @@
         alertBox.style.zIndex = '9999';
         alertBox.style.fontFamily = "'Segoe UI', sans-serif";
         alertBox.style.transition = 'opacity 0.2s ease-in-out';
-        alertBox.style.opacity = '0'; // Mulai dari transparan untuk efek fade-in
+        alertBox.style.opacity = '0'; // FIXED: Menghapus huruf 'n' typo pembawa syntax error
         alertBox.style.textAlign = 'center';
         alertBox.style.minWidth = '280px';
 
-        // Isi struktur teks dan tombol OK emas
         alertBox.innerHTML = `
             <div style="margin-bottom: 18px; font-size: 0.95rem; line-height: 1.5;">
                 ⚠️ <strong>Akses Terbatas</strong><br>Silakan login sebagai pembeli terlebih dahulu.
@@ -157,15 +145,12 @@
             </button>
         `;
 
-        // Munculkan di layar
         document.body.appendChild(alertBox);
 
-        // Beri sedikit jeda agar animasi fade-in berjalan mulus
         setTimeout(() => {
             alertBox.style.opacity = '1';
         }, 10);
 
-        // Efek hover untuk tombol OK
         let btnOk = document.getElementById('btn-toast-ok');
         btnOk.onmouseover = function() {
             this.style.background = '#e3c153';
@@ -174,7 +159,6 @@
             this.style.background = '#f2d472';
         };
 
-        // Logika saat tombol OK ditekan: Fade-out lalu pindah ke halaman Login
         btnOk.onclick = function() {
             alertBox.style.opacity = '0';
             setTimeout(() => {

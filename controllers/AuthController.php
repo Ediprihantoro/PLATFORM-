@@ -15,14 +15,9 @@ class AuthController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $userModel = new UserModel();
             
-            // --- PROTEKSI XSS (Pembersihan Input) ---
-            // htmlspecialchars: Mencegah eksekusi script HTML/JS jahat
             $nama = htmlspecialchars(trim($_POST['nama']), ENT_QUOTES, 'UTF-8');
-            // filter_var: Memastikan format email valid dan bersih dari karakter aneh
             $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-            // Password dibiarkan utuh karena mesin Hash butuh karakter aslinya (simbol, dll)
             $password = $_POST['password']; 
-            // ----------------------------------------
             
             if ($userModel->register($nama, $email, $password)) {
                 header("Location: index.php?area=auth&action=login");
@@ -37,7 +32,6 @@ class AuthController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $userModel = new UserModel();
             
-            // Bersihkan inputan login juga
             $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL); 
             $password = $_POST['password'];
             
@@ -46,7 +40,6 @@ class AuthController {
             if ($user) {
                 $_SESSION['user_id'] = $user['idUser'];
                 
-                // Mencegah XSS saat nama ditampilkan di Navbar
                 $_SESSION['nama'] = htmlspecialchars($user['nama'], ENT_QUOTES, 'UTF-8'); 
                 $_SESSION['tipe_akun'] = $user['tipe_akun'];
 

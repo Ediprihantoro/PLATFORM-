@@ -165,5 +165,25 @@ class ProdukAdminController {
         header("Location: index.php?area=admin");
         exit();
     }
+// Memproses perubahan status dari form di halaman detail pesanan
+    public function updateStatusPesanan() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Tangkap data dari form
+            $idPesanan = $_POST['idPesanan'];
+            $statusBaru = $_POST['status_baru'];
+
+            // Panggil model transaksi
+            require_once 'models/TransaksiModel.php';
+            $transaksiModel = new TransaksiModel();
+            
+            // Jalankan perintah update ke database
+            $transaksiModel->updateStatusPesanan($idPesanan, $statusBaru);
+            
+            // Redirect (kembalikan) ke halaman detail pesanan itu lagi biar admin langsung lihat perubahannya
+            header("Location: index.php?area=admin&action=detail_pesanan&id=" . $idPesanan);
+            exit();
+        }
+    }
+
 }
 ?>

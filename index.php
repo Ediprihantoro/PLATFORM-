@@ -56,10 +56,16 @@ elseif ($area === 'admin') {
         case 'kelola_pesanan':
             $adminController->kelolaPesanan();
             break;
+        case 'detail_pesanan':
+            include 'views/admin/pesanan/detail.php'; 
+            break;
+        case 'update_status_proses':
+            $adminController->updateStatusPesanan(); 
+            break;
         case 'verifikasi_pesanan':
             $adminController->verifikasiPesanan();
             break;
-        case 'etalase': // <--- INI RUTE BARU UNTUK PREVIEW ETALASE ADMIN
+        case 'etalase': 
             $adminController->etalase();
             break;
         default:

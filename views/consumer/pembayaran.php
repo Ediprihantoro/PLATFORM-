@@ -60,7 +60,12 @@
     </div>
 </div>
 
-<?php $status_pesanan = $detail_pesanan['status_pesanan'] ?? ''; ?>
+<?php 
+$status_pesanan = $detail_pesanan['status_pesanan'] ?? ''; 
+$metode = $detail_pesanan['metode_pembayaran'] ?? '';
+$metode_kecil = strtolower($metode);
+$is_tunai = (strpos($metode_kecil, 'cod') !== false || strpos($metode_kecil, 'tempat') !== false || $metode == 'Bayar di Tempat (COD)');
+?>
 
 <div style="background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #8EB69B; margin-top: 30px; box-shadow: 0 4px 10px rgba(5, 31, 32, 0.05);">
     <h3 style="color: #051F20; margin-top: 0; border-bottom: 2px dashed #DAF1DE; padding-bottom: 15px; font-size: 1.3rem;">
@@ -70,7 +75,7 @@
     <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; background: #F7FAF8; padding: 15px; border-radius: 8px;">
         <div>
             <span style="color: #64748b; font-size: 0.95rem;">Metode Pembayaran:</span><br>
-            <strong style="color: #163832; font-size: 1.1rem;"><?= htmlspecialchars($detail_pesanan['metode_pembayaran'] ?? '-') ?></strong>
+            <strong style="color: #163832; font-size: 1.1rem;"><?= htmlspecialchars($metode) ?></strong>
         </div>
         <div style="text-align: right;">
             <span style="color: #64748b; font-size: 0.95rem;">Status Pesanan Saat Ini:</span><br>
@@ -92,7 +97,7 @@
 
     <?php if ($status_pesanan === 'Menunggu Pembayaran'): ?>
         
-        <?php if(($detail_pesanan['metode_pembayaran'] ?? '') === 'Transfer Bank'): ?>
+        <?php if(!$is_tunai): ?>
             <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 30px; border-radius: 12px; margin-bottom: 25px; text-align: center;">
                 <h3 style="color: #b45309; margin-top: 0; font-size: 1.2rem; margin-bottom: 5px;">Menunggu Pembayaran</h3>
                 <p style="color: #78350f; margin: 0 0 10px 0;">Total yang harus ditransfer:</p>
@@ -128,7 +133,7 @@
                 </form>
             </div>
 
-        <?php elseif(($detail_pesanan['metode_pembayaran'] ?? '') === 'COD'): ?>
+        <?php else: ?>
             <div style="background: #F7FAF8; border: 1px solid #8EB69B; padding: 40px 30px; border-radius: 12px; text-align: center;">
                 <div style="font-size: 3.5rem; margin-bottom: 15px;">🤝</div>
                 <h3 style="color: #051F20; margin-top: 0; font-size: 1.6rem; margin-bottom: 10px;">Pembayaran Tunai</h3>
@@ -171,7 +176,7 @@
             <?php if (($detail_pesanan['metode_pengiriman'] ?? '') === 'Ambil Sendiri'): ?>
                 Pesanan ini telah selesai dan <b>sudah diambil</b> di toko. 
             <?php else: ?>
-                Pesanan ini telah selesai dan <b>sudah diterima</b> di alamat pengiriman Anda. 
+                Pesanan ini telah selesai and <b>sudah diterima</b> di alamat pengiriman Anda. 
             <?php endif; ?>
             
             <br>Terima kasih telah mempercayakan belanja frozen food Anda di Lezaat!

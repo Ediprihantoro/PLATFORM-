@@ -16,27 +16,23 @@ class ProdukModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // --- TAMBAHKAN FUNGSI INI ---
     public function tambahProduk($data) {
         $query = "INSERT INTO produk (namaProduk, kategori, harga_eceran, deskripsiProduk, is_active) 
                   VALUES (:namaProduk, :kategori, :harga_eceran, :deskripsiProduk, 1)";
         
         $stmt = $this->conn->prepare($query);
         
-        // Memasukkan data dari form ke query SQL
         $stmt->bindParam(':namaProduk', $data['namaProduk']);
         $stmt->bindParam(':kategori', $data['kategori']);
         $stmt->bindParam(':harga_eceran', $data['harga_eceran']);
         $stmt->bindParam(':deskripsiProduk', $data['deskripsiProduk']);
         
-        // Eksekusi!
         if ($stmt->execute()) {
             return true;
         }
         return false;
     }
 
-    // --- TAMBAHKAN FUNGSI INI ---
     public function hapusProduk($id) {
         $query = "UPDATE produk SET is_active = 0 WHERE idProduk = :id";
         $stmt = $this->conn->prepare($query);
@@ -57,7 +53,6 @@ class ProdukModel {
     }
 
     public function updateProduk($id, $data) {
-        // PERHATIKAN BARIS INI: ada tambahan stok=:stok di dalam query-nya!
         $query = "UPDATE produk SET namaProduk=:namaProduk, kategori=:kategori, 
                   harga_eceran=:harga_eceran, stok=:stok, deskripsiProduk=:deskripsiProduk 
                   WHERE idProduk=:id";
@@ -69,7 +64,6 @@ class ProdukModel {
         $stmt->bindParam(':kategori', $data['kategori']);
         $stmt->bindParam(':harga_eceran', $data['harga_eceran']);
         
-        // PASTIKAN BARIS INI ADA UNTUK MENGIKAT ANGKA 50 KE DATABASE
         $stmt->bindParam(':stok', $data['stok']); 
         
         $stmt->bindParam(':deskripsiProduk', $data['deskripsiProduk']);
@@ -79,18 +73,14 @@ class ProdukModel {
         }
         return false;
     }
-    // 1. Fungsi khusus Admin agar bisa melihat produk yang dihapus
     public function getSemuaProdukAdmin() {
-        // Tanpa WHERE is_active = 1, jadi semua produk ketarik
         $query = "SELECT * FROM produk ORDER BY idProduk DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // 2. Fungsi untuk menyalakan kembali produk
     public function restoreProduk($id) {
-        // Mengubah status kembali menjadi 1 (Aktif)
         $query = "UPDATE produk SET is_active = 1 WHERE idProduk = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);

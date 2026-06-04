@@ -3,16 +3,15 @@
 <div style="background: linear-gradient(135deg, #0B2B26 0%, #051F20 100%); border-radius: 15px; padding: 40px 30px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; margin-top: 20px; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.2); overflow: hidden; border: 1px solid #163832;">
     <div style="position: relative; z-index: 1;">
         <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 2.8rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">
-            <span style="color: #f2d472;">LEZZAT</span> <span style="color: #DAF1DE;">FROZEN FOOD</span>
+            <span style="color: #f2d472;">LEZZAT</span> <span style="color: #DAF1DE;">NYA KEBANGETAN</span>
         </h1>
         <p style="color: #8EB69B; margin: 0 0 20px 0; font-size: 1.1rem; line-height: 1.6; max-width: 550px;">
-            <strong style="color: #DAF1DE; letter-spacing: 2px;">TASTY • CONVENIENT • ALWAYS FRESH</strong><br><br>
-            Tampilan etalase ini persis seperti yang dilihat oleh pelanggan Anda.
+            <strong style="color: #DAF1DE; letter-spacing: 2px;">TASTY • CONVENIENT • ALWAYS FRESH</strong>
         </p>
         <div style="display: flex; gap: 20px; margin-bottom: 10px;">
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">❄️</span> Freshly Frozen</span>
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">⏱️</span> Ready in Minutes</span>
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">✅</span> 100% Halal</span>
+            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> Freshly Frozen</span>
+            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> Ready in Minutes</span>
+            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> 100% Halal</span>
         </div>
     </div>
     

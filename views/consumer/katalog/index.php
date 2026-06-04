@@ -9,7 +9,7 @@
 
     <div style="position: relative; z-index: 1;">
         <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 2.8rem; font-weight: 900; letter-spacing: 1px; text-transform: lower;">
-            <span style="color: #f6c30a;  font-family:'Limelight', cursive;">FROZEN</span> <span style="color: #DAF1DE; font-family:Limelight">FOOD RANGE</span>
+            <span style="color: #f6c30a;  font-family:'Limelight', cursive;">LEZZAT</span> <span style="color: #DAF1DE; font-family:Limelight">NYA KEBANGETAN</span>
         </h1>
         <p style="color: #d5e7da; margin: 0 0 20px 0; font-size: 1.1rem; line-height: 1.5; max-width: 550px; font-family: Poppins;">
             <strong style="color: #e2db9a; letter-spacing: 2px;font-family: 'Bodoni Moda', sans-serif; font-style: italic; font-size:1rem;">tasty • convenient • always fresh</strong><br><br>
@@ -17,9 +17,9 @@
         </p>
 
         <div style="display: flex; gap: 20px; margin-bottom: 25px;">
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">❄️</span> Freshly Frozen</span>
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">⏱️</span> Ready in Minutes</span>
-            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;">✅</span> 100% Halal</span>
+            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> Freshly Frozen</span>
+            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> Ready in Minutes</span>
+            <span style="color: #DAF1DE; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.2rem;"></span> 100% Halal</span>
         </div>
 
         <a href="#area-produk" style="display: inline-block; padding: 12px 30px; background: #f2d472; color: #051F20; text-decoration: none; border-radius: 5px; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">

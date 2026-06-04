@@ -76,26 +76,22 @@
                         </p>
 
                         <?php
-                        // Cek apakah user sudah login DAN bertipe 'customer'
                         $is_customer = (isset($_SESSION['tipe_akun']) && strtolower($_SESSION['tipe_akun']) == 'customer');
                         ?>
 
                         <?php if ($is_customer): ?>
 
-                            <!-- CUSTOMER: Tombol normal, lanjut ke halaman Detail Produk -->
-                            <a href="index.php?area=consumer&action=detail_produk&id=<?= $row['idProduk'] ?>" style="display: block; text-align: center; background: #f2d472;font-family: 'Montserrat',sans-serif;font-weight:700;font-size: 14px;text-transform: uppercase;color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
+                            <a href="index.php?area=consumer&action=detail_produk&id=<?= $row['idProduk'] ?>                                                                       " style="display: block; text-align: center; background: #f2d472;font-family: 'Montserrat',sans-serif;font-weight:700;font-size: 14px;text-transform: uppercase;color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
                                 Beli Sekarang
                             </a>
 
                         <?php else: ?>
 
-                            <!-- NON-CUSTOMER (Guest/Admin): Panggil fungsi customAlertRedirect -->
-                            <a href="index.php?area=auth&action=login" onclick="customAlertRedirect(event, this.href)" style="display: block; text-align: center; background: #f2d472; color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
+                            <a href="index.php?area=auth&action=login" onclick="customAlertRedirect(event, this.href)                                                             " style="display: block; text-align: center; background: #f2d472; color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
                                 Beli Sekarang
                             </a>
 
                         <?php endif; ?>
-
                     <?php else: ?>
 
                         <p style="font-size: 0.85rem; margin: 0 0 15px 0; font-weight: bold; color: #ff6b6b;">
@@ -125,10 +121,8 @@
         // Tahan klik agar tidak langsung pindah halaman seketika
         event.preventDefault();
 
-        // Cegah alert menumpuk jika user menekan tombol Beli berkali-kali
         if (document.getElementById('custom-toast-alert')) return;
 
-        // Buat elemen notifikasi (Toast) yang elegan
         let alertBox = document.createElement('div');
         alertBox.id = 'custom-toast-alert';
         alertBox.style.position = 'fixed';
@@ -147,7 +141,6 @@
         alertBox.style.textAlign = 'center';
         alertBox.style.minWidth = '280px';
 
-        // Isi struktur teks dan tombol OK emas
         alertBox.innerHTML = `
             <div style="margin-bottom: 18px; font-size: 0.95rem; line-height: 1.5;">
                 ⚠️ <strong>Akses Terbatas</strong><br>Silakan login sebagai pembeli terlebih dahulu.
@@ -157,15 +150,12 @@
             </button>
         `;
 
-        // Munculkan di layar
         document.body.appendChild(alertBox);
 
-        // Beri sedikit jeda agar animasi fade-in berjalan mulus
         setTimeout(() => {
             alertBox.style.opacity = '1';
         }, 10);
 
-        // Efek hover untuk tombol OK
         let btnOk = document.getElementById('btn-toast-ok');
         btnOk.onmouseover = function() {
             this.style.background = '#e3c153';
@@ -174,7 +164,6 @@
             this.style.background = '#f2d472';
         };
 
-        // Logika saat tombol OK ditekan: Fade-out lalu pindah ke halaman Login
         btnOk.onclick = function() {
             alertBox.style.opacity = '0';
             setTimeout(() => {

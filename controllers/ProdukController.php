@@ -3,21 +3,15 @@ require_once 'models/ProdukModel.php';
 
 class ProdukController {
     
-    // ==========================================
-    // AREA B2C (ETALASE PEMBELI)
-    // ==========================================
     public function index() {
         $produkModel = new ProdukModel();
         $data_produk = $produkModel->getAllProduk();
 
         require_once 'views/consumer/layout/header.php';
-        require_once 'views/consumer/katalog/index.php'; // Pastikan path ini benar
+        require_once 'views/consumer/katalog/index.php'; 
         require_once 'views/consumer/layout/footer.php';
     }
 
-    // ==========================================
-    // AREA ADMIN (DAPUR TOKO)
-    // ==========================================
     public function adminIndex() {
         $produkModel = new ProdukModel();
         $data_produk = $produkModel->getAllProduk();

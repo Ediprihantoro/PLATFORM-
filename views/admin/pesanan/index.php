@@ -85,7 +85,7 @@
                                     <?php if($metode_kecil == 'cod' || $metode_kecil == 'bayar di tempat'): ?>
                                         <a href="index.php?area=admin&action=verifikasi_pesanan&id=<?= $row['idOrder'] ?>&status=Diproses" style="background: #2563eb; color: #fff; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; box-shadow: 0 2px 4px rgba(37,99,235,0.2);">📦 Proses COD</a>
                                     <?php else: ?>
-                                        <span style="color: #94a3b8; font-style: italic; font-size: 0.85rem;">Menunggu Transfer</span>
+                                        <span style="color: #94a3b8; font-style: italic; font-size: 0.85rem;">⏳ Menunggu Transfer</span>
                                     <?php endif; ?>
 
                                 <?php elseif($status_kecil == 'menunggu verifikasi'): ?>
@@ -101,7 +101,7 @@
                                     <span style="color: #94a3b8; font-weight: bold;">-</span>
                                 <?php endif; ?>
                             </td>
-                            </tr>
+                        </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </tbody>

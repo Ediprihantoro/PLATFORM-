@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "ecommerce_FrozenFood"; // Sesuaikan dengan nama databasemu
+    private $db_name = "ecommerce_FrozenFood"; 
     private $username = "root";
     private $password = "";
     public $conn;
@@ -18,3 +18,4 @@ class Database {
     }
 }
 ?>
+

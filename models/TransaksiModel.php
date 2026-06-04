@@ -9,12 +9,10 @@ class TransaksiModel {
         $this->conn = $database->getConnection();
     }
 
-    // Fungsi baru dengan parameter lengkap dari form checkout
     public function simpanPesanan($idUser, $totalBelanja, $detailPesanan, $namaPenerima, $noHp, $alamatLengkap, $metodePengiriman, $metodePembayaran, $catatan) {
         try {
             $this->conn->beginTransaction();
 
-            // 1. VALIDASI STOK EKSTRA KETAT
             foreach ($detailPesanan as $item) {
                 $stmtCek = $this->conn->prepare("SELECT stok, namaProduk FROM produk WHERE idProduk = :id FOR UPDATE");
                 $stmtCek->bindParam(':id', $item['idProduk']);
@@ -26,8 +24,6 @@ class TransaksiModel {
                 }
             }
 
-            // 2. SIMPAN KE TABEL PESANAN INDUK LENGKAP DENGAN ALAMAT
-            // PERHATIKAN NAMA KOLOM STATUS_PESANAN, pastikan namanya sama dengan yang ada di database-mu
             $queryPesanan = "INSERT INTO pesanan 
                 (idUser, nama_penerima, no_hp, alamat_lengkap, metode_pengiriman, metode_pembayaran, catatan, tanggal_pesanan, total_harga, status_pesanan) 
                 VALUES 
@@ -43,14 +39,12 @@ class TransaksiModel {
             $stmtPesanan->bindParam(':catatan', $catatan);
             $stmtPesanan->bindParam(':total', $totalBelanja);
             
-            // Eksekusi jika berhasil
             if(!$stmtPesanan->execute()) {
                 throw new Exception("Gagal menyimpan ke tabel pesanan");
             }
             
             $idPesananBaru = $this->conn->lastInsertId();
 
-            // 3. SIMPAN DETAIL PESANAN & KURANGI STOK
             foreach ($detailPesanan as $item) {
                 // Insert detail
                 $queryDetail = "INSERT INTO detail_pesanan (idPesanan, idProduk, jumlah, harga_satuan, subtotal) VALUES (:idPesanan, :idProduk, :jumlah, :harga, :subtotal)";
@@ -62,7 +56,6 @@ class TransaksiModel {
                 $stmtDetail->bindParam(':subtotal', $item['subtotal']);
                 $stmtDetail->execute();
 
-                // Potong stok
                 $queryStok = "UPDATE produk SET stok = stok - :jumlah WHERE idProduk = :idProduk";
                 $stmtStok = $this->conn->prepare($queryStok);
                 $stmtStok->bindParam(':jumlah', $item['jumlah']);
@@ -70,7 +63,6 @@ class TransaksiModel {
                 $stmtStok->execute();
             }
 
-            // 4. COMMIT & SELESAI
             $this->conn->commit();
             return $idPesananBaru;
 
@@ -80,16 +72,14 @@ class TransaksiModel {
             return false;
         }
     }
-    // Fungsi untuk menambahkan stok berdasarkan ID pesanan yang dibatalkan
+    
     public function tambahkanStokBatal($idPesanan) {
-        // 1. Ambil detail barang dari pesanan yang dibatalkan
         $queryDetail = "SELECT idProduk, jumlah FROM detail_pesanan WHERE idPesanan = :idPesanan";
         $stmtDetail = $this->conn->prepare($queryDetail);
         $stmtDetail->bindParam(':idPesanan', $idPesanan);
         $stmtDetail->execute();
         $items = $stmtDetail->fetchAll(PDO::FETCH_ASSOC);
 
-        // 2. Kembalikan stok ke tabel produk
         $queryUpdate = "UPDATE produk SET stok = stok + :jumlah WHERE idProduk = :id_produk";
         $stmtUpdate = $this->conn->prepare($queryUpdate);
 
@@ -100,9 +90,6 @@ class TransaksiModel {
         }
     }
    public function getPesananByUser($idUser) {
-        // PERBAIKAN: 
-        // 1. Urutkan berdasarkan idPesanan DESC (paling aman dari typo tanggal)
-        // 2. Gunakan SQL ALIAS (AS) agar namanya otomatis berubah dan cocok dengan file pesanan.php!
         $query = "SELECT 
                     idPesanan AS idOrder, 
                     tanggal_pesanan, 
@@ -119,7 +106,6 @@ class TransaksiModel {
     }
 
     public function getDetailPesanan($idPesanan, $idUser) {
-        // Ambil data pesanan utama
         $queryPesanan = "SELECT * FROM pesanan WHERE idPesanan = :idPesanan AND idUser = :idUser";
         $stmtPesanan = $this->conn->prepare($queryPesanan);
         $stmtPesanan->bindParam(':idPesanan', $idPesanan);
@@ -129,7 +115,6 @@ class TransaksiModel {
 
         if (!$pesanan) return null;
 
-        // Ambil detail item + nama produk
         $queryDetail = "SELECT dp.*, p.namaProduk FROM detail_pesanan dp JOIN produk p ON dp.idProduk = p.idProduk WHERE dp.idPesanan = :idPesanan";
         $stmtDetail = $this->conn->prepare($queryDetail);
         $stmtDetail->bindParam(':idPesanan', $idPesanan);
@@ -138,19 +123,17 @@ class TransaksiModel {
 
         return $pesanan;
     }
-    // Fungsi untuk memperbarui status dan nama file bukti transfer
     public function updateBuktiTransfer($idPesanan, $namaFile) {
-        // Update nama file dan ubah statusnya otomatis
-        $query = "UPDATE pesanan SET bukti_transfer = :bukti, status_pesanan = 'Menunggu Verifikasi' WHERE idPesanan = :id";
+        $query = "UPDATE pesanan SET bukti_transfer = :bukti, status_pesanan = 
+        'Menunggu Verifikasi' WHERE idPesanan = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':bukti', $namaFile);
         $stmt->bindParam(':id', $idPesanan);
         return $stmt->execute();
     }
-   // INI ADALAH FUNGSI YANG DICARI OLEH CONTROLLER ADMIN!
     public function getAllPesananAdmin() {
-        // Menggabungkan tabel pesanan dan customer agar nama pembeli muncul di tabel admin
-        $query = "SELECT p.idPesanan AS idOrder, p.tanggal_pesanan, p.total_harga AS total, p.status_pesanan AS status, p.bukti_transfer, u.nama AS nama_pembeli 
+        $query = "SELECT p.idPesanan AS idOrder, p.tanggal_pesanan, p.total_harga AS total, 
+        p.status_pesanan AS status, p.bukti_transfer, u.nama AS nama_pembeli 
                   FROM pesanan p 
                   JOIN customer u ON p.idUser = u.idUser 
                   ORDER BY p.idPesanan DESC";
@@ -159,7 +142,6 @@ class TransaksiModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Fungsi untuk memperbarui status pesanan dari tombol admin
     public function updateStatusPesanan($idPesanan, $status) {
         $query = "UPDATE pesanan SET status_pesanan = :status WHERE idPesanan = :id";
         $stmt = $this->conn->prepare($query);

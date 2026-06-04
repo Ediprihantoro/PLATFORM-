@@ -89,7 +89,8 @@ class TransaksiModel {
             $stmtUpdate->execute();
         }
     }
-   public function getPesananByUser($idUser) {
+
+    public function getPesananByUser($idUser) {
         $query = "SELECT 
                     idPesanan AS idOrder, 
                     tanggal_pesanan, 
@@ -123,6 +124,7 @@ class TransaksiModel {
 
         return $pesanan;
     }
+
     public function updateBuktiTransfer($idPesanan, $namaFile) {
         $query = "UPDATE pesanan SET bukti_transfer = :bukti, status_pesanan = 
         'Menunggu Verifikasi' WHERE idPesanan = :id";
@@ -131,9 +133,10 @@ class TransaksiModel {
         $stmt->bindParam(':id', $idPesanan);
         return $stmt->execute();
     }
+
     public function getAllPesananAdmin() {
-        $query = "SELECT p.idPesanan AS idOrder, p.tanggal_pesanan, p.total_harga AS total, 
-        p.status_pesanan AS status, p.bukti_transfer, u.nama AS nama_pembeli 
+        // RESOLVED: Menggabungkan tabel pesanan dan customer serta menyertakan metode_pembayaran agar informasi di sisi admin lebih lengkap
+        $query = "SELECT p.idPesanan AS idOrder, p.tanggal_pesanan, p.total_harga AS total, p.status_pesanan AS status, p.bukti_transfer, p.metode_pembayaran, u.nama AS nama_pembeli 
                   FROM pesanan p 
                   JOIN customer u ON p.idUser = u.idUser 
                   ORDER BY p.idPesanan DESC";

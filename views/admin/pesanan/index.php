@@ -8,16 +8,12 @@
             Pantau pesanan masuk, kelola stok produk, dan pastikan stok selalu segar hari ini!
         </p>
     </div>
-    
-    <div style="font-size: 4rem; display: flex; gap: 15px;">
-        📦 📊
-    </div>
 </div>
 
 <div style="font-family: 'Segoe UI', sans-serif; color: #051F20;">
     
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h2 style="color: #051F20; margin: 0; border-bottom: 2px solid #8EB69B; padding-bottom: 5px;">📋 Manajemen Pesanan Masuk</h2>
+        <h2 style="color: #051F20; margin: 0; border-bottom: 2px solid #8EB69B; padding-bottom: 5px;">Manajemen Pesanan Masuk</h2>
     </div>
 
     <div style="background: #ffffff; padding: 0; border-radius: 12px; border: 1px solid #8EB69B; margin-top: 20px; overflow-x: auto; box-shadow: 0 5px 15px rgba(5, 31, 32, 0.05);">
@@ -54,7 +50,7 @@
                             <td style="padding: 15px; text-align: center;">
                                 <?php if(!empty($row['bukti_transfer'])): ?>
                                     <a href="uploads/<?= $row['bukti_transfer'] ?>" target="_blank" style="color: #0284c7; text-decoration: none; border: 1px solid #7dd3fc; background: #e0f2fe; padding: 6px 12px; border-radius: 5px; font-size: 0.85rem; font-weight: bold; display: inline-block; transition: 0.2s;" onmouseover="this.style.background='#bae6fd'" onmouseout="this.style.background='#e0f2fe'">
-                                        🖼️ Lihat Struk
+                                        Lihat Struk
                                     </a>
                                 <?php else: ?>
                                     <span style="color: #94a3b8; font-style: italic; font-size: 0.85rem;">Belum diunggah</span>
@@ -105,7 +101,7 @@
                                     <span style="color: #94a3b8; font-weight: bold;">-</span>
                                 <?php endif; ?>
                             </td>
-                            </tr>
+                        </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </tbody>

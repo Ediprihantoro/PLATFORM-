@@ -5,11 +5,9 @@
 
 <h2 style="color: #051F20; border-bottom: 2px solid #8EB69B; padding-bottom: 10px;">Preview Etalase Toko</h2>
 
-
-<!-- BANNER -->
 <div style="background: linear-gradient(rgba(5, 31, 32, 0.8), rgba(5, 31, 32, 0.8)), url('assets/images/produk/latar2.jpg'); background-size: cover; background-position: center; border-radius: 15px; padding: 50px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 40px; margin-top: 20px; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.2); overflow: hidden; border: 1px solid #163832;">
     
-    <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 3.8rem; font-weight: 900; letter-spacing: 2px; text-transform: lower;">
+    <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 3.8rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">
         <span style="color: #f2d472; font-family:'Limelight', cursive;">LEZAAT</span> <span style="color: #DAF1DE; font-family:Limelight">FROZEN FOOD</span>
     </h1>
     
@@ -20,8 +18,6 @@
     </div>
 
 </div>
-
-<!-- PRODUK -->
 
 <div id="area-produk"></div>
 
@@ -61,7 +57,6 @@
                     </h4>
 
                     
-                    <!-- tambah ini -->
                     <div style="padding-top: 15px; border-top: 1px dashed #cbd5e1; display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-size: 0.9rem; font-weight: bold; color: #475569;">Stok Tersedia:</span>
                         

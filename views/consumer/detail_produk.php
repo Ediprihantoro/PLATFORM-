@@ -1,6 +1,3 @@
-
-<html>
-
 <div style="font-family: 'Segoe UI', sans-serif;">
 
     <a href="index.php?area=consumer&action=katalog" style="color: #235347; text-decoration: none; font-size: 0.95rem; display: inline-block; margin-bottom: 20px; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#051F20'" onmouseout="this.style.color='#235347'">
@@ -10,9 +7,10 @@
     <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 5px;">
 
         <div style="flex: 2; min-width: 300px;">
-            <div style="width: 100%; height: 350px; background: #DAF1DE; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid #8EB69B; margin-bottom: 25px; overflow: hidden;">
+            
+            <div style="width: 100%; height: 350px; background: #DAF1DE; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid #8EB69B; margin-bottom: 25px; overflow: hidden; padding: 20px; box-sizing: border-box;">
                 <?php if (!empty($produk['gambar'])): ?>
-                    <img src="assets/images/produk/<?= htmlspecialchars($produk['gambar']) ?>" alt="<?= htmlspecialchars($produk['namaProduk']) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/produk/<?= htmlspecialchars($produk['gambar']) ?>" alt="<?= htmlspecialchars($produk['namaProduk']) ?>" style="width: 100%; height: 100%; object-fit: contain;">
                 <?php else: ?>
                     <span style="color: #8EB69B; font-size: 4rem; opacity: 0.5;">📦</span>
                 <?php endif; ?>
@@ -23,6 +21,32 @@
                 Rp <?= number_format($produk['harga_eceran'], 0, ',', '.') ?>
             </div>
 
+            <?php 
+            if(!empty($produk['variasi'])): 
+                $list_variasi = explode(',', $produk['variasi']);
+            ?>
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #051F20; margin-bottom: 15px; font-size: 1.1rem; border-bottom: 1px solid #DAF1DE; padding-bottom: 10px;">
+                        Pilih variasi: <span id="teks-variasi-terpilih" style="color: #ef4444; font-weight: bold; font-size: 1rem;">(Wajib dipilih)</span>
+                    </h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <?php foreach($list_variasi as $var): ?>
+                            <?php 
+                                $var = trim($var);
+                                if(empty($var)) continue; 
+                            ?>
+                            <button type="button" class="btn-variasi" onclick="pilihVariasi(this, '<?= htmlspecialchars($var) ?>')" style="padding: 10px 18px; background: #ffffff; border: 1px solid #cbd5e1; color: #475569; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
+                                <?= htmlspecialchars($var) ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div style="margin-bottom: 30px; border-bottom: 1px solid #DAF1DE; padding-bottom: 10px;">
+                    <span style="color: #64748b; font-size: 0.95rem;">Varian: <strong style="color: #16a34a;">Standard / Tanpa Variasi</strong></span>
+                </div>
+            <?php endif; ?>
 
             <div style="border-bottom: 2px solid #DAF1DE; padding-bottom: 10px; margin-bottom: 15px;">
                 <span style="color: #163832; font-weight: bold; font-size: 1.1rem; border-bottom: 3px solid #8EB69B; padding-bottom: 10px;">Informasi Produk</span>
@@ -44,7 +68,7 @@
 
                 <?php elseif ($produk['namaProduk'] == 'Sosis Sapi Bratwurst 300g'): ?>
                     Sosis ala Jerman dengan ukuran jumbo dan tekstur daging sapi yang super padat. Nggak perlu ribet dibumbuin lagi, 
-                    karena rasanya udah gurih maksimal dengan sensasi rempah dan aroma <i>smokey</i> yang khas. Paling enak dipanggang, di-<i>grill</i> untuk BBQ, atau jadi isian hotdog.
+                    percayalah karena rasanya udah gurih maksimal dengan sensasi rempah dan aroma <i>smokey</i> yang khas. Paling enak dipanggang, di-<i>grill</i> untuk BBQ, atau jadi isian hotdog.
 
                 <?php elseif ($produk['namaProduk'] == 'Siomay Ayam Udang Isi 20'): ?>
                     Perpaduan sempurna antara daging ayam cincang gurih dan potongan udang manis yang kerasa banget teksturnya. 
@@ -55,9 +79,9 @@
                     tapi dalamnya tetap lembut. Cukup tabur sedikit garam atau cocol saus sambal, rasanya dijamin persis kayak kentang goreng di kafe-kafe hits!
 
                 <?php endif; ?>
+            </p>
         </div>
 
-        <!-- box atur jumlah -->
         <div style="flex: 1; min-width: 300px; position: sticky; top: 20px; align-self: flex-start;">
             <div style="background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #8EB69B; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.05);">
                 <h3 style="margin-top: 0; color: #051F20; border-bottom: 1px dashed #cbd5e1; padding-bottom: 15px; margin-bottom: 20px;">Atur Jumlah</h3>
@@ -65,8 +89,9 @@
                 <?php if ($produk['stok'] > 0): ?>
                     <form action="index.php?area=consumer&action=tambah_keranjang" method="POST" id="form-keranjang">
                         <input type="hidden" name="idProduk" value="<?= $produk['idProduk'] ?>">
-                        <input type="hidden" name="variasi" id="input-variasi-tersembunyi" value="">
-
+                        
+                        <input type="hidden" name="variasi" id="input-variasi-tersembunyi" value="<?= !empty($produk['variasi']) ? '' : 'Standard' ?>">
+                        
                         <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
                             <input type="number" name="jumlah" min="1" max="<?= $produk['stok'] ?>" value="1" required style="width: 80px; padding: 10px; background: #F7FAF8; border: 1px solid #8EB69B; color: #051F20; border-radius: 6px; text-align: center; font-weight: bold; font-size: 1.1rem; outline: none;">
 
@@ -81,7 +106,7 @@
                         </div>
 
                         <button type="submit" onclick="return validasiVariasi()" style="width: 100%; padding: 14px; background: #f2d472; color: #051F20; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(242, 212, 114, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 15px rgba(242, 212, 114, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(242, 212, 114, 0.3)';">
-                            Keranjang
+                            Tambahkan Keranjang
                         </button>
                     </form>
                 <?php else: ?>
@@ -93,10 +118,9 @@
                     </button>
                 <?php endif; ?>
             </div>
+            
             <div style="margin-top: 20px; background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #8EB69B; box-shadow: 0 4px 15px rgba(5, 31, 32, 0.05); font-family: 'Segoe UI', Arial, sans-serif;">
-
                 <h3 style="margin-top: 0; color: #051F20; margin-bottom: 15px; font-size: 1.2rem;">Keunggulan Layanan Kami</h3>
-
                 <div style="border-bottom: 1px dashed #cbd5e1; margin-bottom: 25px;"></div>
 
                 <div style="display: flex; gap: 18px; margin-bottom: 22px; align-items: flex-start;">
@@ -131,17 +155,13 @@
                     </div>
                     <div>
                         <h4 style="margin: 0 0 6px 0; color: #051F20; font-size: 1rem;">Kualitas Terjamin</h4>
-                        <p style="margin: 0; color: #475569; font-size: 0.9rem; line-height: 1.5;">Produk kami dibuat dari bahan pilihan, higienis, dan halal.</p>
+                        <p style="margin: 0; color: #475569; font-size: 0.9rem; line-height: 1.5;">Produk kami dibuat dari bahan pilihan, higienis, and halal.</p>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-</div>
-
-</div>
-</div>
 </div>
 
 <script>
@@ -165,6 +185,12 @@
     }
 
     function validasiVariasi() {
+        // PERBAIKAN VALIDASI: Cek jika produk memiliki variasi, user wajib memilih salah satu sebelum submit
+        let inputVariasi = document.getElementById('input-variasi-tersembunyi').value;
+        if (inputVariasi === '') {
+            alert('Silakan pilih variasi produk terlebih dahulu!');
+            return false;
+        }
         return true;
     }
 </script>

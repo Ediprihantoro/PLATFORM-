@@ -5,12 +5,10 @@
 
 <h2 style="color: #051F20; border-bottom: 2px solid #8EB69B; padding-bottom: 10px;">Katalog Produk</h2>
 
-
-<!-- BANNER -->
-<div style="background: linear-gradient(rgba(5, 31, 32, 0.8), rgba(5, 31, 32, 0.8)), url('assets/images/latarBanner.jpg'); background-size: cover; background-position: center; border-radius: 15px; padding: 50px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 40px; margin-top: 20px; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.2); overflow: hidden; border: 1px solid #163832;">
+<div style="background: linear-gradient(rgba(5, 31, 32, 0.82), rgba(5, 31, 32, 0.82)), url('assets/images/latarBanner.jpg'); background-size: cover; background-position: center; border-radius: 15px; padding: 50px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 40px; margin-top: 20px; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.2); overflow: hidden; border: 1px solid #163832;">
     
-    <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 3.8rem; font-weight: 900; letter-spacing: 2px; text-transform: lower;">
-        <span style="color: #f2d472; font-family:'Limelight', cursive;">LEZAAT</span> <span style="color: #DAF1DE; font-family:Limelight">FROZEN FOOD</span>
+    <h1 style="margin: 0 0 10px 0; font-family: 'Arial', sans-serif; font-size: 3.8rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">
+        <span style="color: #f6c30a; font-family:'Limelight', cursive;">LEZZAT</span> <span style="color: #DAF1DE; font-family:Limelight">NYA KEBANGETAN</span>
     </h1>
     
     <p style="color: #d5e7da; margin: 0 auto 25px auto; font-size: 1.1rem; line-height: 1.5; max-width: 600px; font-family: Poppins;">
@@ -29,8 +27,6 @@
     </a>
 
 </div>
-
-<!-- PRODUK -->
 
 <div id="area-produk"></div>
 
@@ -71,7 +67,7 @@
 
                     <?php if ($row['stok'] > 0): ?>
 
-                        <p style="font-size: 0.85rem; margin: 0 0 15px 0; font-weight: bold; color: #163832; font-weight:bold;">
+                        <p style="font-size: 0.85rem; margin: 0 0 15px 0; font-weight: bold; color: #163832;">
                             Sisa stok: <?= htmlspecialchars($row['stok']) ?>
                         </p>
 
@@ -81,13 +77,13 @@
 
                         <?php if ($is_customer): ?>
 
-                            <a href="index.php?area=consumer&action=detail_produk&id=<?= $row['idProduk'] ?>                                                                       " style="display: block; text-align: center; background: #f2d472;font-family: 'Montserrat',sans-serif;font-weight:700;font-size: 14px;text-transform: uppercase;color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
+                            <a href="index.php?area=consumer&action=detail_produk&id=<?= $row['idProduk'] ?>" style="display: block; text-align: center; background: #f2d472;font-family: 'Montserrat',sans-serif;font-weight:700;font-size: 14px;text-transform: uppercase;color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
                                 Beli Sekarang
                             </a>
 
                         <?php else: ?>
 
-                            <a href="index.php?area=auth&action=login" onclick="customAlertRedirect(event, this.href)                                                             " style="display: block; text-align: center; background: #f2d472; color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
+                            <a href="index.php?area=auth&action=login" onclick="customAlertRedirect(event, this.href)" style="display: block; text-align: center; background: #f2d472; color: #051F20; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; box-sizing: border-box;" onmouseover="this.style.background='#e3c153'" onmouseout="this.style.background='#f2d472'">
                                 Beli Sekarang
                             </a>
 
@@ -136,7 +132,7 @@
         alertBox.style.zIndex = '9999';
         alertBox.style.fontFamily = "'Segoe UI', sans-serif";
         alertBox.style.transition = 'opacity 0.2s ease-in-out';
-        alertBox.style.opacity = '0'; n
+        alertBox.style.opacity = '0'; // FIXED: Menghapus huruf 'n' typo pembawa syntax error
         alertBox.style.textAlign = 'center';
         alertBox.style.minWidth = '280px';
 

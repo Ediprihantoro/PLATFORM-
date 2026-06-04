@@ -11,41 +11,42 @@ class KatalogController {
         require_once 'views/consumer/katalog/index.php';
         require_once 'views/consumer/layout/footer.php';
     }
+
     public function tambahKeranjang() {
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: index.php?area=auth&action=login");
-        exit();
-    }
-    if (isset($_SESSION['tipe_akun']) && strtolower($_SESSION['tipe_akun']) === 'admin') {
-        echo "<script>
-                alert('Akses Ditolak! Admin tidak perlu memasukkan barang ke keranjang.');
-                window.location.href = 'index.php?area=consumer&action=katalog';
-              </script>";
-        exit();
-    }
-
-    if (!isset($_SESSION['keranjang'])) {
-        $_SESSION['keranjang'] = [];
-    }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProduk'])) {
-        $id_produk = $_POST['idProduk'];
-        $jumlah = (int)$_POST['jumlah'];
-        $variasi = isset($_POST['variasi']) ? $_POST['variasi'] : 'Reguler';
-        $kunci_unik = $id_produk . '-' . $variasi;
-
-        if (isset($_SESSION['keranjang'][$kunci_unik])) {
-            $_SESSION['keranjang'][$kunci_unik]['jumlah'] += $jumlah;
-        } else {
-            $_SESSION['keranjang'][$kunci_unik] = [
-                'idProduk' => $id_produk,
-                'jumlah' => $jumlah,
-                'variasi' => $variasi
-            ];
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: index.php?area=auth&action=login");
+            exit();
         }
-        header("Location: index.php?area=consumer&action=keranjang");
-        exit();
-    } 
-}
+        if (isset($_SESSION['tipe_akun']) && strtolower($_SESSION['tipe_akun']) === 'admin') {
+            echo "<script>
+                    alert('Akses Ditolak! Admin tidak perlu memasukkan barang ke keranjang.');
+                    window.location.href = 'index.php?area=consumer&action=katalog';
+                  </script>";
+            exit();
+        }
+
+        if (!isset($_SESSION['keranjang'])) {
+            $_SESSION['keranjang'] = [];
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProduk'])) {
+            $id_produk = $_POST['idProduk'];
+            $jumlah = (int)$_POST['jumlah'];
+            $variasi = isset($_POST['variasi']) ? $_POST['variasi'] : 'Reguler';
+            $kunci_unik = $id_produk . '-' . $variasi;
+
+            if (isset($_SESSION['keranjang'][$kunci_unik])) {
+                $_SESSION['keranjang'][$kunci_unik]['jumlah'] += $jumlah;
+            } else {
+                $_SESSION['keranjang'][$kunci_unik] = [
+                    'idProduk' => $id_produk,
+                    'jumlah' => $jumlah,
+                    'variasi' => $variasi
+                ];
+            }
+            header("Location: index.php?area=consumer&action=keranjang");
+            exit();
+        } 
+    }
 
     public function keranjang() {
         if (!isset($_SESSION['user_id']) || $_SESSION['tipe_akun'] !== 'customer') {
@@ -190,7 +191,6 @@ class KatalogController {
     }
 
     public function detailPesanan() {
-        // Proteksi: Pastikan user login
         if (!isset($_SESSION['user_id']) || $_SESSION['tipe_akun'] !== 'customer') {
             header("Location: index.php?area=auth&action=login");
             exit();
@@ -215,20 +215,19 @@ class KatalogController {
         }
 
         require_once 'views/consumer/layout/header.php';
+        // RESOLVED: Menggunakan detail_pesanan.php agar sesuai nama fungsi.
+        // Catatan: Jika tim menyepakati diganti menjadi pembayaran.php, silakan ubah baris di bawah ini.
         require_once 'views/consumer/detail_pesanan.php'; 
         require_once 'views/consumer/layout/footer.php';
     }
 
-
     public function uploadBukti() {
-        // 1. Proteksi keamanan
         if (!isset($_SESSION['user_id'])) {
             header("Location: index.php?area=auth&action=login");
             exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
             if (isset($_FILES['bukti_transfer']) && $_FILES['bukti_transfer']['error'] === UPLOAD_ERR_OK) {
                 $idPesanan = $_POST['idPesanan'];
                 $target_dir = "uploads/"; 
@@ -256,6 +255,7 @@ class KatalogController {
             }
         }
     }
+
     public function detailProduk() {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -277,6 +277,7 @@ class KatalogController {
             exit();
         }
     }
+
     public function updateKeranjang() {
         if (isset($_GET['id']) && isset($_GET['aksi'])) {
             $kunci_unik = $_GET['id']; 

@@ -36,7 +36,6 @@ if (isset($_SESSION['keranjang']) && is_array($_SESSION['keranjang'])) {
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: #051F20; border-bottom: 4px solid #8EB69B; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
         
         <h2 style="margin: 0; color: #DAF1DE; font-family: 'Limelight', sans-serif; font-weight: 900; font-size: 1.8rem; letter-spacing: 0.5px;">
@@ -45,8 +44,6 @@ if (isset($_SESSION['keranjang']) && is_array($_SESSION['keranjang'])) {
         
         <div style="font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; gap: 20px;">
             <a href="index.php?area=consumer&action=home" style="color: #DAF1DE; text-decoration: none; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#f2d472'" onmouseout="this.style.color='#DAF1DE'">Home</a>
-            
-            <a href="index.php?area=consumer&action=katalog" style="color: #DAF1DE; text-decoration: none; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#f2d472'" onmouseout="this.style.color='#DAF1DE'">Katalog</a>
             
             <span style="color: #163832;">|</span> 
 
@@ -60,8 +57,7 @@ if (isset($_SESSION['keranjang']) && is_array($_SESSION['keranjang'])) {
                     📦 Pesanan
                 </a>
 
-                <a href="index.php?area=consumer&action=keranjang" style="color: #ffffff; text-decoration: none; font-weight: 900; margin-left: 10px; background: #044c1f; padding: 8px 18px; border-radius: 25px; 
-                transition: transform 0.2s, background 0.2s, box-shadow 0.2s; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 10px rgba(22, 163, 74, 0.3);" onmouseover="this.style.background='#0c5527'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(22, 163, 74, 0.4)';" onmouseout="this.style.background='#095023'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(22, 163, 74, 0.3)';">
+                <a href="index.php?area=consumer&action=keranjang" style="color: #ffffff; text-decoration: none; font-weight: 900; margin-left: 10px; background: #044c1f; padding: 8px 18px; border-radius: 25px; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 10px rgba(4, 76, 31, 0.3);" onmouseover="this.style.background='#0c5527'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(4, 76, 31, 0.4)';" onmouseout="this.style.background='#044c1f'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(4, 76, 31, 0.3)';">
                     🛒 (<?= $total_item_keranjang ?>)
                 </a>
                 

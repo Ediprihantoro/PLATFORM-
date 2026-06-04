@@ -89,13 +89,13 @@
                                     <?php endif; ?>
 
                                 <?php elseif($status_kecil == 'menunggu verifikasi'): ?>
-                                    <a href="index.php?area=admin&action=verifikasi_pesanan&id=<?= $row['idOrder'] ?>&status=Diproses" style="background: #f59e0b; color: #fff; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; box-shadow: 0 2px 4px rgba(245,158,11,0.2);">✔️ Terima Pembayaran</a>
+                                    <a href="index.php?area=admin&action=verifikasi_pesanan&id=<?= $row['idOrder'] ?>&status=Diproses" style="background: #f59e0b; color: #fff; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; box-shadow: 0 2px 4px rgba(245,158,11,0.2);">Terima Pembayaran</a>
                                 
                                 <?php elseif($status_kecil == 'diproses'): ?>
-                                    <a href="index.php?area=admin&action=verifikasi_pesanan&id=<?= $row['idOrder'] ?>&status=Dikirim" style="background: #2563eb; color: #fff; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; box-shadow: 0 2px 4px rgba(37,99,235,0.2);">🚚 Kirim Pesanan</a>
+                                    <a href="index.php?area=admin&action=verifikasi_pesanan&id=<?= $row['idOrder'] ?>&status=Dikirim" style="background: #2563eb; color: #fff; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; box-shadow: 0 2px 4px rgba(37,99,235,0.2);">Kirim Pesanan</a>
                                 
                                 <?php elseif($status_kecil == 'dikirim'): ?>
-                                    <a href="index.php?area=admin&action=verifikasi_pesanan&id=<?= $row['idOrder'] ?>&status=Selesai" style="background: #16a34a; color: #fff; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; box-shadow: 0 2px 4px rgba(22,163,74,0.2);">🏁 Tandai Selesai</a>
+                                    <a href="index.php?area=admin&action=verifikasi_pesanan&id=<?= $row['idOrder'] ?>&status=Selesai" style="background: #16a34a; color: #fff; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; box-shadow: 0 2px 4px rgba(22,163,74,0.2);">Tandai Selesai</a>
                                 
                                 <?php else: ?>
                                     <span style="color: #94a3b8; font-weight: bold;">-</span>

@@ -17,7 +17,7 @@
         $kurir  = $detail_pesanan['metode_pengiriman'] ?? ''; 
         $total  = $detail_pesanan['total_harga'] ?? 0;
 
-        // RUMUS KEBAL PELURU: Apapun ketikan di database, selama ada unsur kata COD/TEMPAT, akan dianggap tunai.
+        
         $metode_kecil = strtolower($metode);
         $is_tunai = (strpos($metode_kecil, 'cod') !== false || strpos($metode_kecil, 'tempat') !== false || $metode == 'Bayar di Tempat (COD)');
         ?>

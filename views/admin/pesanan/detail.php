@@ -1,25 +1,23 @@
 <?php
-// === PANGGIL NAVBAR / HEADER ADMIN LU DI SINI ===
+// Memanggil tata letak header admin
 require_once 'views/admin/layout/header.php';
-
-// 1. Panggil file database
 require_once 'config/database.php';
 
-// 2. Bikin koneksi baru
+// Inisialisasi koneksi database menggunakan PDO
 $database = new Database();
 $db = $database->getConnection();
 
-// Tangkap ID Pesanan dari URL
+// Menangkap ID pesanan dari parameter URL
 $id_pesanan = $_GET['id'] ?? '';
 
-// 3. Query pesanan pakai PDO
+// Mengambil data utama pesanan beserta info pengiriman pelanggan
 $query_pesanan = "SELECT * FROM pesanan WHERE idPesanan = :id";
 $stmt_pesanan = $db->prepare($query_pesanan);
 $stmt_pesanan->bindParam(':id', $id_pesanan);
 $stmt_pesanan->execute();
 $data = $stmt_pesanan->fetch(PDO::FETCH_ASSOC);
 
-// 4. Query detail barang pakai PDO
+// Mengambil daftar produk yang dibeli dalam pesanan tersebut
 $query_detail = "
     SELECT dp.*, p.namaProduk as nama_produk 
     FROM detail_pesanan dp 
@@ -31,14 +29,17 @@ $stmt_detail->bindParam(':id', $id_pesanan);
 $stmt_detail->execute();
 $detail_pesanan_list = $stmt_detail->fetchAll(PDO::FETCH_ASSOC);
 
-// 5. HITUNG OTOMATIS SUBTOTAL & ONGKIR
+// Menghitung total harga produk murni (tanpa ongkir)
 $total_subtotal_produk = 0;
 foreach($detail_pesanan_list as $row) {
     $total_subtotal_produk += $row['subtotal'];
 }
 
+// Mendapatkan nilai ongkir dari selisih total tagihan dan subtotal produk
 $ongkir = ($data['total_harga'] ?? 0) - $total_subtotal_produk;
-if ($ongkir < 0) { $ongkir = 0; }
+if ($ongkir < 0) { 
+    $ongkir = 0; 
+}
 ?>
 
 <div style="font-family: 'Segoe UI', sans-serif; color: #051F20; padding: 20px; max-width: 1200px; margin: 0 auto;">
@@ -57,6 +58,7 @@ if ($ongkir < 0) { $ongkir = 0; }
     <div style="display: flex; flex-wrap: wrap; gap: 20px;">
         
         <div style="flex: 1; min-width: 300px;">
+            
             <div style="background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
                 <h4 style="color: #163832; margin-top: 0; font-size: 1.1rem;">Informasi Pengiriman</h4>
                 <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
@@ -104,6 +106,7 @@ if ($ongkir < 0) { $ongkir = 0; }
                     <div style="margin-bottom: 15px; background: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #fde68a;">
                         <label style="color: #64748b; font-size: 0.9rem; display: block; margin-bottom: 8px;">Status Saat Ini:</label>
                         <?php 
+                            // Penentuan warna background dan teks berdasarkan status pesanan
                             $bg_status = '#e2e8f0'; $text_status = '#475569'; 
                             $status_raw = strtolower($data['status_pesanan'] ?? '');
                             if($status_raw == 'pending' || $status_raw == 'menunggu pembayaran') { $bg_status = '#fef3c7'; $text_status = '#d97706'; } 
@@ -138,6 +141,7 @@ if ($ongkir < 0) { $ongkir = 0; }
         </div>
 
         <div style="flex: 1.5; min-width: 300px;">
+            
             <div style="background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; height: 100%;">
                 <h4 style="color: #163832; margin-top: 0; font-size: 1.1rem;">Rincian Barang Belanjaan</h4>
                 <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
@@ -200,6 +204,6 @@ if ($ongkir < 0) { $ongkir = 0; }
 </div>
 
 <?php 
-// === PANGGIL FOOTER ADMIN LU DI SINI ===
+// Memanggil tata letak footer admin
 require_once 'views/admin/layout/footer.php'; 
 ?>

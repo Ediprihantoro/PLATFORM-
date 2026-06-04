@@ -65,7 +65,7 @@ elseif ($area === 'admin') {
         case 'verifikasi_pesanan':
             $adminController->verifikasiPesanan();
             break;
-        case 'etalase': // <--- INI RUTE BARU UNTUK PREVIEW ETALASE ADMIN
+        case 'etalase': 
             $adminController->etalase();
             break;
         default:

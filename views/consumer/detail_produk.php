@@ -6,7 +6,7 @@
 
     <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 5px;">
 
-        <div style="flex: 2; min-width: 300px;">
+        <div style="flex: 2; min-width: 300px;">   
             
             <div style="width: 100%; height: 350px; background: #DAF1DE; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid #8EB69B; margin-bottom: 25px; overflow: hidden; padding: 20px; box-sizing: border-box;">
                 <?php if (!empty($produk['gambar'])): ?>

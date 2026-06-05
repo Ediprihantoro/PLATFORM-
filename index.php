@@ -25,7 +25,6 @@ if ($area === 'auth') {
 
 // AREA ADMIN 
 elseif ($area === 'admin') {
-    // Keamanan: Tendang jika belum login atau bukan admin
     if (!isset($_SESSION['user_id']) || $_SESSION['tipe_akun'] !== 'admin') {
         header("Location: index.php?area=auth&action=login");
         exit();
@@ -56,8 +55,8 @@ elseif ($area === 'admin') {
         case 'kelola_pesanan':
             $adminController->kelolaPesanan();
             break;
-        case 'detail_pesanan':
-            include 'views/admin/pesanan/detail.php'; 
+        case 'detail_pesanan': 
+            $adminController->detailPesanan();
             break;
         case 'update_status_proses':
             $adminController->updateStatusPesanan(); 

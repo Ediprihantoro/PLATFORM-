@@ -13,7 +13,7 @@ class ProdukModel {
         $query = "SELECT * FROM produk WHERE is_active = 1 ORDER BY idProduk ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);//mengubah data dari database menjadi Associative Array
     }
 
     public function tambahProduk($data) {
@@ -49,7 +49,7 @@ class ProdukModel {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);//mengubah data dari database menjadi Associative Array
     }
 
     public function updateProduk($id, $data) {

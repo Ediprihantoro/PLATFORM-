@@ -58,7 +58,7 @@
 
             </form>
         </div>
-
+     <!-- Ringkasan pesanan -->
         <div style="flex: 1; min-width: 320px; background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #8EB69B; box-shadow: 0 10px 25px rgba(5, 31, 32, 0.05); position: sticky; top: 90px;">
             <h3 style="color: #051F20; margin-top: 0; border-bottom: 2px dashed #DAF1DE; padding-bottom: 15px; margin-bottom: 20px; font-size: 1.3rem;">Ringkasan Pesanan</h3>
             

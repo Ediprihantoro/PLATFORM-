@@ -15,9 +15,9 @@ class ProdukAdminController {
 
     // Fungsi untuk menampilkan preview etalase bagi Admin
     public function etalase() {
-        // 1. Panggil class Model-nya terlebih dahulu
+        // Memangil class Model-nya 
         $produkModel = new ProdukModel();
-        // 2. Ambil datanya (menggunakan fungsi yang sama dengan halaman index)
+        // Mengambil datanya
         $data_produk = $produkModel->getSemuaProdukAdmin(); 
         
         // 3. Panggil kerangka layout dan halaman etalase admin
@@ -114,7 +114,6 @@ class ProdukAdminController {
         $data_pesanan = $transaksiModel->getAllPesananAdmin();
 
         require_once 'views/admin/layout/header.php';
-        // Nanti kita buat file ini setelah backend-nya siap
         require_once 'views/admin/pesanan/index.php'; 
         require_once 'views/admin/layout/footer.php';
     }
@@ -181,6 +180,54 @@ class ProdukAdminController {
             
             // Redirect (kembalikan) ke halaman detail pesanan itu lagi biar admin langsung lihat perubahannya
             header("Location: index.php?area=admin&action=detail_pesanan&id=" . $idPesanan);
+            exit();
+        }
+    }
+    // Menampilkan halaman Detail Pesanan 
+    public function detailPesanan() {
+        if (isset($_GET['id'])) {
+            $id_pesanan = $_GET['id'];
+
+            require_once 'config/database.php';
+            $database = new Database();
+            $db = $database->getConnection();
+
+            // Query Mengambil Data Utama Pesanan
+            $query_pesanan = "SELECT * FROM pesanan WHERE idPesanan = :id";
+            $stmt_pesanan = $db->prepare($query_pesanan);
+            $stmt_pesanan->bindParam(':id', $id_pesanan);
+            $stmt_pesanan->execute();
+            $data = $stmt_pesanan->fetch(PDO::FETCH_ASSOC);
+
+            // Query Mengambil Daftar Produk yang Dibeli
+            $query_detail = "
+                SELECT dp.*, p.namaProduk as nama_produk 
+                FROM detail_pesanan dp 
+                JOIN produk p ON dp.idProduk = p.idProduk 
+                WHERE dp.idPesanan = :id
+            ";
+            $stmt_detail = $db->prepare($query_detail);
+            $stmt_detail->bindParam(':id', $id_pesanan);
+            $stmt_detail->execute();
+            $detail_pesanan_list = $stmt_detail->fetchAll(PDO::FETCH_ASSOC);
+
+            // Menghitung Subtotal dan Ongkir
+            $total_subtotal_produk = 0;
+            foreach($detail_pesanan_list as $row) {
+                $total_subtotal_produk += $row['subtotal'];
+            }
+
+            $ongkir = ($data['total_harga'] ?? 0) - $total_subtotal_produk;
+            if ($ongkir < 0) { 
+                $ongkir = 0; 
+            }
+
+            require_once 'views/admin/layout/header.php';
+            require_once 'views/admin/pesanan/detail.php';            
+            require_once 'views/admin/layout/footer.php';
+        } else {
+            // Jika tidak ada ID di URL,kembali ke daftar pesanan
+            header("Location: index.php?area=admin&action=kelola_pesanan");
             exit();
         }
     }

@@ -175,6 +175,7 @@
                     </div>
                 </div>
 
+                <!-- bukti bayar -->
                 <div style="background: #ffffff; border: 1px dashed #cbd5e1; padding: 20px; border-radius: 12px; text-align: left;">
                     <?php if(empty($detail_pesanan['bukti_transfer'])): ?>
                         <h4 style="color: #0f172a; margin-top: 0; margin-bottom: 15px;">Upload Bukti Transfer</h4>
